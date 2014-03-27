@@ -14,5 +14,9 @@ class TestWebCrawler(unittest.TestCase):
 	def testInstantiateWebAddress(self):
 		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/Robots_exclusion_standard")
 
+	def testGetCurrentPage(self):
+		self.spider.getCurrentPage()
+		self.assertEquals(self.spider.currentPage.getcode(), 200)
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestWebCrawler)
 unittest.TextTestRunner(verbosity=2).run(suite)

@@ -1,3 +1,9 @@
 test list:
+- takes a keyword to search for #done!
 - takes a starting web address
 - retreaves the page from the website
+- searches the page for the key word
+- displays the page name if key word was found
+- parses links on the current page
+- adds links to queue
+- if keyword not found, gets next page

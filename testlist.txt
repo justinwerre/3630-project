@@ -1,6 +1,6 @@
 test list:
 - takes a keyword to search for #done!
-- takes a starting web address
+- takes a starting web address #done!
 - retreaves the page from the website
 - searches the page for the key word
 - displays the page name if key word was found

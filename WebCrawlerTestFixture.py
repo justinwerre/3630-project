@@ -18,5 +18,9 @@ class TestWebCrawler(unittest.TestCase):
 		self.spider.getCurrentPage()
 		self.assertEquals(self.spider.currentPage.getcode(), 200)
 
+	def testFindKeyWord(self):
+		self.spider.getCurrentPage()
+		self.assertEquals(self.spider.findKeyword(), True)
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestWebCrawler)
 unittest.TextTestRunner(verbosity=2).run(suite)

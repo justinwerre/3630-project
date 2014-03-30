@@ -22,5 +22,16 @@ class TestWebCrawler(unittest.TestCase):
 		self.spider.getCurrentPage()
 		self.assertEquals(self.spider.findKeyword(), True)
 
+	def testParseLinks(self):
+		self.spider.getCurrentPage()
+		self.spider.findKeyword()
+		self.assertEquals(len(self.spider.links), 98)
+
+	def testGetNextWebpage(self):
+		self.spider.getCurrentPage()
+		self.spider.findKeyword()
+		self.spider.nextPage()
+		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/MediaWiki:Robots.txt")
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestWebCrawler)
 unittest.TextTestRunner(verbosity=2).run(suite)

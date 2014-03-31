@@ -2,8 +2,8 @@ test list:
 - takes a keyword to search for #done!
 - takes a starting web address #done!
 - retreaves the page from the website #done!
-- searches the page for the key word 
+- searches the page for the key word #done!
 - displays the page name if key word was found
-- parses links on the current page
-- adds links to queue
-- if keyword not found, gets next page
+- parses links on the current page #done!
+- adds links to queue Done!
+- if keyword not found, gets next page Done!

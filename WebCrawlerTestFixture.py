@@ -32,6 +32,22 @@ class TestWebCrawler(unittest.TestCase):
 		self.spider.findKeyword()
 		self.spider.nextPage()
 		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/MediaWiki:Robots.txt")
+		self.assertEquals(len(self.spider.links), 97	)
+		self.spider.getCurrentPage()
+		self.assertEquals(self.spider.currentPage.getcode(), 200)
+
+	def testParstInternetArchive(self):
+		self.spider = WebCrawler("robot", "http://en.wikipedia.org/wiki/internet_archive")
+		self.spider.getCurrentPage()
+		self.spider.findKeyword()
+
+	def testFollowRobotDotTxt(self):
+		testLinks = list()
+		testLinks.append("/wiki/Special:Search")
+		testLinks.append("/wiki/computers")
+		self.spider.links.extend(testLinks)
+		self.spider.nextPage()
+		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/computers")
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestWebCrawler)
 unittest.TextTestRunner(verbosity=2).run(suite)

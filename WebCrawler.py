@@ -8,6 +8,8 @@ class WebCrawler:
 		self.keyWord = keyWord
 		self.currentWebAddress = webAddress
 		self.links = deque()
+		self.history = set()
+		self.history.add(webAddress)
 		self.robotParser = robotparser.RobotFileParser()
 		self.robotParser.set_url("http://en.wikipedia.org/robots.txt")
 		self.robotParser.read()
@@ -28,6 +30,8 @@ class WebCrawler:
 		foundNextPage = False
 		while not foundNextPage:
 			#extend adds elements to the right, so the next element is in the left
-			self.currentWebAddress = "http://en.wikipedia.org" + self.links.popleft();
-			if self.robotParser.can_fetch("*", self.currentWebAddress):
+			self.currentWebAddress = "http://en.wikipedia.org" + self.links.popleft()
+			print "checking to see if we can parse a page: ", self.currentWebAddress
+			if self.robotParser.can_fetch("*", self.currentWebAddress) and self.currentWebAddress not in self.history:
 				foundNextPage = True
+				self.history.add(self.currentWebAddress)

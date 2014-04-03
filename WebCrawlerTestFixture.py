@@ -49,5 +49,16 @@ class TestWebCrawler(unittest.TestCase):
 		self.spider.nextPage()
 		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/computers")
 
+	def testDontParseDuplicatPage(self):	
+		testLinks = list()
+		testLinks.append("/wiki/computers")
+		testLinks.append("/wiki/computers")
+		testLinks.append("/wiki/computers_hard_drives")
+		self.spider.links.extend(testLinks)
+		self.spider.nextPage()
+		self.spider.nextPage()
+		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/computers_hard_drives")
+
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestWebCrawler)
 unittest.TextTestRunner(verbosity=2).run(suite)

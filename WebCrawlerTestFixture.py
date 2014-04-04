@@ -59,6 +59,14 @@ class TestWebCrawler(unittest.TestCase):
 		self.spider.nextPage()
 		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/computers_hard_drives")
 
+	def testParseTheUnready(self): 
+		testLinks = list()
+		testLinks.append("/wiki/%C3%86thelred_the_Unready")
+		self.spider.links.extend(testLinks)
+		self.spider.nextPage()
+		self.assertEquals(self.spider.currentWebAddress, "http://en.wikipedia.org/wiki/%C3%86thelred_the_Unready")
+
+
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestWebCrawler)
 unittest.TextTestRunner(verbosity=2).run(suite)

@@ -1,3 +1,4 @@
+import urllib
 import urllib2 
 import robotparser
 from collections import deque
@@ -10,8 +11,7 @@ class WebCrawler:
 		self.links = deque()
 		self.history = set()
 		self.history.add(webAddress)
-		self.robotParser = robotparser.RobotFileParser()
-		self.robotParser.set_url("http://en.wikipedia.org/robots.txt")
+		self.robotParser = robotparser.RobotFileParser("http://en.wikipedia.org/robots.txt")
 		self.robotParser.read()
 
 
@@ -31,7 +31,7 @@ class WebCrawler:
 		while not foundNextPage:
 			#extend adds elements to the right, so the next element is in the left
 			self.currentWebAddress = "http://en.wikipedia.org" + self.links.popleft()
-			print "checking to see if we can parse a page: ", self.currentWebAddress
-			if self.robotParser.can_fetch("*", self.currentWebAddress) and self.currentWebAddress not in self.history:
+			# since robotParser quotes the url, we have to unquote it and convert it to uft8 so it will work with certain special charaters like the latin small letter ae
+			if self.robotParser.can_fetch("*", urllib.unquote(self.currentWebAddress).encode("utf8")) and self.currentWebAddress not in self.history:
 				foundNextPage = True
 				self.history.add(self.currentWebAddress)
